@@ -1,7 +1,7 @@
 class Coffee {
   final int id;
   final String name;
-  final String price;
+  final int price;
   final String imagePath;
   final int quantity;
 

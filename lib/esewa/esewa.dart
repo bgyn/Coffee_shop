@@ -6,7 +6,7 @@ import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/material.dart';
 
 class Esewa {
-  pay() {
+  pay(int total) {
     try {
       EsewaFlutterSdk.initPayment(
         esewaConfig: EsewaConfig(
@@ -15,9 +15,9 @@ class Esewa {
           secretId: kEsewaSecretKey,
         ),
         esewaPayment: EsewaPayment(
-          productId: "1d71jd81",
-          productName: "Product One",
-          productPrice: "20",
+          productId: "Coffee 1",
+          productName: "Coffee",
+          productPrice: total.toString(),
         ),
         onPaymentSuccess: (EsewaPaymentSuccessResult data) {
           debugPrint(":::SUCCESS::: => $data");
@@ -33,8 +33,8 @@ class Esewa {
       debugPrint("EXCEPTION : ${e.toString()}");
     }
   }
-  verify(EsewaPaymentSuccessResult data){
+
+  verify(EsewaPaymentSuccessResult data) {
     //todo: after success
-    
   }
 }

@@ -35,7 +35,6 @@ class CoffeeCartTile extends StatelessWidget {
             subtitle: Text("\$ ${cofee.price}"),
             leading: Image.asset(cofee.imagePath),
             trailing: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: SizedBox(

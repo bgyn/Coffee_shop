@@ -1,4 +1,5 @@
 import 'package:coffee_app/components/coffee_cart_tile.dart';
+import 'package:coffee_app/esewa/esewa.dart';
 import 'package:coffee_app/model/coffee_model.dart';
 import 'package:coffee_app/model/shop_model.dart';
 import 'package:coffee_app/states/cart_states.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CartPage extends ConsumerWidget {
+  int sum = 0;
+  final Esewa _esewa = Esewa();
   final shop = Shop();
   CartPage({super.key});
 
@@ -45,7 +48,14 @@ class CartPage extends ConsumerWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: cartList.isEmpty ? null : () {},
+              onPressed: cartList.isEmpty
+                  ? null
+                  : () {
+                      for (final price in cartList) {
+                        sum += price.price;
+                      }
+                      _esewa.pay(sum);
+                    },
               child: const Text("CheckOut"),
             ),
           ],
