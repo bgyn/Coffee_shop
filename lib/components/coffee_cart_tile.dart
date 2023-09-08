@@ -1,8 +1,12 @@
 import 'package:coffee_app/model/coffee_model.dart';
+import 'package:coffee_app/states/cart_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CoffeeCartTile extends StatelessWidget {
+class CoffeeCartTile extends ConsumerWidget {
+  final void Function()? onDereament;
+  final void Function()? onIncreament;
   final void Function()? onPressed;
   final Widget icon;
   final Coffee cofee;
@@ -11,10 +15,12 @@ class CoffeeCartTile extends StatelessWidget {
     required this.cofee,
     required this.onPressed,
     required this.icon,
+    required this.onDereament,
+    required this.onIncreament,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.of(context).size.height * 1;
     final width = MediaQuery.of(context).size.width * 1;
     return Container(
@@ -45,7 +51,7 @@ class CoffeeCartTile extends StatelessWidget {
                       children: [
                         Expanded(
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: onDereament,
                             icon: const FaIcon(
                               FontAwesomeIcons.minus,
                               size: 16,
@@ -58,7 +64,7 @@ class CoffeeCartTile extends StatelessWidget {
                         ),
                         Expanded(
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: onIncreament,
                             icon: const FaIcon(
                               FontAwesomeIcons.plus,
                               size: 16,

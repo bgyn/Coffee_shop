@@ -15,6 +15,14 @@ class CartState extends StateNotifier<List<Coffee>> {
   void remove(Coffee coffee) {
     state = state.where((item) => coffee.id != item.id).toList();
   }
+
+  void udpate(Coffee coffee, int quantity) {
+    state = state
+        .map((thisCoffee) => coffee.id == thisCoffee.id
+            ? thisCoffee.update(quantity: quantity)
+            : thisCoffee)
+        .toList();
+  }
 }
 
 final cartProvider =

@@ -17,7 +17,11 @@ class CartPage extends ConsumerWidget {
     final cartList = ref.watch(cartProvider);
 
     void deleteFromCart(Coffee coffee) {
-      ref.read(cartProvider.notifier).remove(coffee);
+      ref.watch(cartProvider.notifier).remove(coffee);
+    }
+
+    void update(Coffee coffee, int quantity) {
+      ref.read(cartProvider.notifier).udpate(coffee, quantity);
     }
 
     return SafeArea(
@@ -39,7 +43,10 @@ class CartPage extends ConsumerWidget {
                 itemCount: cartList.length,
                 itemBuilder: (context, index) {
                   Coffee eachCofee = cartList[index];
+                  var quantity = 1;
                   return CoffeeCartTile(
+                    onDereament: () => update(eachCofee, quantity--),
+                    onIncreament: () => update(eachCofee, 5),
                     cofee: eachCofee,
                     icon: const Icon(Icons.delete),
                     onPressed: () => deleteFromCart(eachCofee),
@@ -52,7 +59,7 @@ class CartPage extends ConsumerWidget {
                   ? null
                   : () {
                       for (final price in cartList) {
-                        sum += price.price;
+                        sum += price.price * price.quantity;
                       }
                       _esewa.pay(sum);
                     },
