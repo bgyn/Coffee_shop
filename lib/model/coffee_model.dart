@@ -17,6 +17,8 @@ class Coffee {
     this.quantity = 1,
   }) : id = id ?? const Uuid().v4();
 
+  int toInt() => quantity;
+
   Coffee update({int? quantity}) => Coffee(
         name: name,
         price: price,

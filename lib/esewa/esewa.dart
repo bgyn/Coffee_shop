@@ -20,6 +20,7 @@ class Esewa {
           productPrice: total.toString(),
         ),
         onPaymentSuccess: (EsewaPaymentSuccessResult data) {
+          verify(data);
           debugPrint(":::SUCCESS::: => $data");
         },
         onPaymentFailure: (data) {

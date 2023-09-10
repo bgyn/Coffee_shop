@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CartPage extends ConsumerWidget {
-  int sum = 0;
   final Esewa _esewa = Esewa();
   final shop = Shop();
   CartPage({super.key});
@@ -43,10 +42,13 @@ class CartPage extends ConsumerWidget {
                 itemCount: cartList.length,
                 itemBuilder: (context, index) {
                   Coffee eachCofee = cartList[index];
-                  var quantity = 1;
                   return CoffeeCartTile(
-                    onDereament: () => update(eachCofee, quantity--),
-                    onIncreament: () => update(eachCofee, 5),
+                    onDereament: eachCofee.quantity == 1
+                        ? null
+                        : () => update(eachCofee, eachCofee.toInt() - 1),
+                    onIncreament: eachCofee.quantity == 5
+                        ? null
+                        : () => update(eachCofee, eachCofee.toInt() + 1),
                     cofee: eachCofee,
                     icon: const Icon(Icons.delete),
                     onPressed: () => deleteFromCart(eachCofee),
@@ -58,6 +60,7 @@ class CartPage extends ConsumerWidget {
               onPressed: cartList.isEmpty
                   ? null
                   : () {
+                      int sum = 0;
                       for (final price in cartList) {
                         sum += price.price * price.quantity;
                       }
