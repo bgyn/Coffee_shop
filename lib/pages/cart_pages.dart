@@ -65,8 +65,9 @@ class CartPage extends ConsumerWidget {
                         sum += price.price * price.quantity;
                       }
                       _esewa.pay(sum);
+                      ref.read(cartProvider.notifier).emptyCart();
                     },
-              child: const Text("CheckOut"),
+              child: const Text("Pay"),
             ),
           ],
         ),

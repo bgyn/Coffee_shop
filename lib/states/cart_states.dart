@@ -23,7 +23,11 @@ class CartState extends StateNotifier<List<Coffee>> {
             : thisCoffee)
         .toList();
   }
+
+  void emptyCart() {
+    state = [];
+  }
 }
 
 final cartProvider =
-    StateNotifierProvider<CartState, List<Coffee>>((ref) => CartState());
+    StateNotifierProvider<CartState, List<Coffee>>((_) => CartState());
